@@ -98,7 +98,7 @@ function Game() {
       const response = await axios(config);
       setCardDraw(response.data.cards[0])
 
-      
+
 
       setFlip(true)
 
@@ -123,6 +123,7 @@ function Game() {
     let oldValue = cardDraw.value;
 
 
+
     if (oldValue == "JACK") {
       oldValue = 11;
     } else if (oldValue == "QUEEN") {
@@ -134,7 +135,14 @@ function Game() {
     else if (oldValue == "ACE") {
       oldValue = 14;
     }
+    else if (oldValue == 10) {
+      oldValue = 10;
+    }
+    else if (oldValue == 0) {
+      oldValue = 10;
+    }
 
+    oldValue = parseInt(oldValue)
 
 
 
@@ -142,13 +150,25 @@ function Game() {
 
     let newValue = await draw();
 
-    setTimeout(console.log("wait"), 2000)
+    if (newValue == "JACK") {
+      newValue = 11;
+    } else if (newValue == "QUEEN") {
+      newValue = 12;
+    }
+    else if (newValue == "KING") {
+      newValue = 13;
+    }
+    else if (newValue == "ACE") {
+      newValue = 14;
+    }
+
+    newValue = parseInt(newValue)
 
     if (oldValue > newValue) {
       answer = "lower"
     } else if (oldValue < newValue) {
       answer = "higher"
-    } else{
+    } else {
       answer = choice;
     }
 
@@ -180,27 +200,30 @@ function Game() {
   return (
     <div>
       <Link to="/"><Button color='secondary' variant="contained"><HomeIcon /></Button></Link>
+
+      <Typography variant="h2">Score: {score}</Typography>
+
+      {localStorage.getItem("highscore") ?
+        <Typography variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography> : <Typography variant="h5">Highscore: 0</Typography>
+      }
+
       {deckState != null ?
 
 
 
         <div>
-          <Typography variant="h2">Score: {score}</Typography>
 
-          {localStorage.getItem("highscore") ?
-            <Typography variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography> : <Typography variant="h5">Highscore: 0</Typography>
-          }
 
           {flip == false ?
             <div>
               {cardDraw != null ?
 
-              <div className="card-front">
-                <img className='cardImg' src={cardDraw.image}></img>
-              </div> : <div className="card-back"></div>
+                <div className="card-front">
+                  <img className='cardImg' src={cardDraw.image}></img>
+                </div> : <div className="card-back"></div>
 
               }
-            </div>: <div className="flipping"></div>
+            </div> : <div className="flipping"></div>
           }
           <div className="gameBtns">
 
@@ -213,7 +236,7 @@ function Game() {
             </form>
 
           </div>
-        </div> : <div>loading...</div>
+        </div> : <div className="card-back"></div>
       }
     </div>
   )
