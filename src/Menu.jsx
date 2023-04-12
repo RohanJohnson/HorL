@@ -15,7 +15,7 @@ function Menu() {
             </div>
             <div className="btns">
                 <Link to='/game'>
-                    <Button variant="contained">Play</Button>
+                    <Button color='secondary' variant="contained">Play</Button>
                 </Link>
                 {/* <Link>
                     <Button variant="outlined"></Button>

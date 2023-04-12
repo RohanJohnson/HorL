@@ -6,20 +6,19 @@ import axios from 'axios';
 import { Typography, Input, Button } from '@mui/material'
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
-
-
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 
 function Game() {
 
 
-
   const [deckState, setDeckState] = useState(null)
   const [cardDraw, setCardDraw] = useState(null)
   const [word, setWord] = useState(null)
   const [score, setScore] = useState(0);
-  const [gameState, setGameState] = useState(true)
+  const [flip, setFlip] = useState(false)
 
   let imageSrc;
 
@@ -53,13 +52,13 @@ function Game() {
       localStorage.setItem("highscore", score)
     }
 
-    setTimeout(console.log("wait"),3000)
+    setTimeout(console.log("wait"), 3000)
 
     newDeck();
 
     setScore(0);
 
-    window.location.href='./'
+    window.location.href = './'
   }
 
   async function setDeck() {
@@ -99,7 +98,15 @@ function Game() {
       const response = await axios(config);
       setCardDraw(response.data.cards[0])
 
-      console.log( response.data.cards[0].value )
+      
+
+      setFlip(true)
+
+      setTimeout(setFlip(false), 3000)
+
+
+
+      console.log(response.data.cards[0].value)
 
       return response.data.cards[0].value
 
@@ -136,16 +143,13 @@ function Game() {
     let newValue = await draw();
 
     setTimeout(console.log("wait"), 2000)
-      
-      if (oldValue > newValue) {
+
+    if (oldValue > newValue) {
       answer = "lower"
     } else if (oldValue < newValue) {
       answer = "higher"
-    } else if (oldValue == newValue){
+    } else{
       answer = choice;
-    }else{
-      console.log(oldValue)
-      console.log(newValue)
     }
 
     if (answer != choice) {
@@ -175,7 +179,7 @@ function Game() {
 
   return (
     <div>
-      <Link to="/"><Button variant="outlined"><HomeIcon /></Button></Link>
+      <Link to="/"><Button color='secondary' variant="contained"><HomeIcon /></Button></Link>
       {deckState != null ?
 
 
@@ -187,16 +191,27 @@ function Game() {
             <Typography variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography> : <Typography variant="h5">Highscore: 0</Typography>
           }
 
-          {cardDraw != null ?
-            <img src={cardDraw.image}></img> : <p>loading...</p>
+          {flip == false ?
+            <div>
+              {cardDraw != null ?
+
+              <div className="card-front">
+                <img className='cardImg' src={cardDraw.image}></img>
+              </div> : <div className="card-back"></div>
+
+              }
+            </div>: <div className="flipping"></div>
           }
           <div className="gameBtns">
+
             <form className="higher" onSubmit={(event) => { handleSubmit(event) }}>
-              <Input disableUnderline={true} className="gameBtn" name="selection" type="submit" value="Higher"></Input>
+              <Button color='secondary' className="gameBtn" type="submit" variant="contained"><KeyboardArrowUpIcon className='icons' /></Button>
             </form>
+
             <form className="lower" onSubmit={(event) => { handleSubmit(event) }}>
-              <Input disableUnderline={true} className="gameBtn" name="selection" type="submit" value="Lower"></Input>
+              <Button color='secondary' className="gameBtn" type="submit" variant="contained"><KeyboardArrowDownIcon className='icons' /></Button>
             </form>
+
           </div>
         </div> : <div>loading...</div>
       }
