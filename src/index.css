@@ -13,7 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
+  background-color: rgb(122, 197, 219);
+
+  width: 100vw;
+  height: 100vh;
 }
+
 
 a {
   font-weight: 500;
@@ -73,3 +78,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.adSpace{
+  background-color: rgb(58, 110, 126);
+  position: absolute;
+  width: 100vw;
+  height: 10vh;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+html{
+  overflow: hidden;
+  background-color: rgb(122, 197, 219);
+}
+

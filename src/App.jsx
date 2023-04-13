@@ -8,12 +8,13 @@ import { Link } from 'react-router-dom';
 import Menu from './Menu'
 import Game from './Game'
 import Test from './Test'
+import Mobile from './Mobile'
 import { Button } from '@mui/material';
 
 
 function App() {
     return(
-    <div>
+    <div className="center">
 
 
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" exact element={<Menu />} />
             <Route path="/game" element={<Game />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/mobile" element={<Mobile />} />
         </Routes>
     </Router>
     </div>

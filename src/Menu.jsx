@@ -17,9 +17,9 @@ function Menu() {
                 <Link to='/game'>
                     <Button color='secondary' variant="contained">Play</Button>
                 </Link>
-                {/* <Link>
-                    <Button variant="outlined"></Button>
-                </Link> */}
+                <Link to="/mobile">
+                    <Button color='secondary' variant="outlined">Mobile</Button>
+                </Link>
             </div>
         </div>
     )

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './Desktop.css'
 import axios from 'axios';
 import { Typography, Input, Button } from '@mui/material'
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import FlipNumbers from 'react-flip-numbers'
 
 
 
@@ -19,6 +20,8 @@ function Game() {
   const [word, setWord] = useState(null)
   const [score, setScore] = useState(0);
   const [flip, setFlip] = useState(false)
+  const [count, setCount] = useState(0)
+  const [value, setValue] = useState(null)
 
   let imageSrc;
 
@@ -58,7 +61,7 @@ function Game() {
 
     setScore(0);
 
-    window.location.href = './'
+    setTimeout(window.location.href = './', 3000);
   }
 
   async function setDeck() {
@@ -85,36 +88,36 @@ function Game() {
 
   async function draw() {
 
-    try {
+    
+        setValue(null)
+      try {
 
-      const url = `https://deckofcardsapi.com/api/deck/${sessionStorage.getItem("deckID")}/draw/?count=1`
+        const url = `https://deckofcardsapi.com/api/deck/${sessionStorage.getItem("deckID")}/draw/?count=1`
 
-      const config = {
-        method: 'get',
-        url: url,
-        headers: {}
+        const config = {
+          method: 'get',
+          url: url,
+          headers: {}
+        }
+
+        const response = await axios(config);
+        setCardDraw(response.data.cards[0])
+
+
+        console.log(response.data.cards[0].value)
+
+        if (value == null) {
+          setValue(response.data.cards[0].value)
+        }
+        return(response.data.cards[0].value)
+
+      } catch (e) {
+        await newDeck()
+        draw()
       }
-
-      const response = await axios(config);
-      setCardDraw(response.data.cards[0])
-
-
-
-      setFlip(true)
-
-      setTimeout(setFlip(false), 3000)
-
-
-
-      console.log(response.data.cards[0].value)
-
-      return response.data.cards[0].value
-
-    } catch (e) {
-      await newDeck()
-      draw()
+      setCount(1)
     }
-  }
+  
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -122,7 +125,7 @@ function Game() {
     let choice = event.target.className;
     let oldValue = cardDraw.value;
 
-
+    setCardDraw(null)
 
     if (oldValue == "JACK") {
       oldValue = 11;
@@ -148,6 +151,8 @@ function Game() {
 
 
 
+    
+
     let newValue = await draw();
 
     if (newValue == "JACK") {
@@ -164,20 +169,22 @@ function Game() {
 
     newValue = parseInt(newValue)
 
-    if (oldValue > newValue) {
-      answer = "lower"
-    } else if (oldValue < newValue) {
-      answer = "higher"
-    } else {
-      answer = choice;
+    function check() {
+      if (oldValue > newValue) {
+        answer = "lower"
+      } else if (oldValue < newValue) {
+        answer = "higher"
+      } else {
+        answer = choice;
+      }
+      if (answer != choice) {
+        setTimeout(gameOver, 1000)
+      } else {
+        setScore(score + 10);
+      }
     }
+    setTimeout(check, 500)
 
-    if (answer != choice) {
-      gameOver()
-      console.log("gameOver")
-    } else {
-      setScore(score + 1);
-    }
 
 
   }
@@ -189,7 +196,8 @@ function Game() {
     newDeck();
   }
 
-  if (cardDraw == null) {
+  if (cardDraw == null && count==0) {
+    setCount(1)
     draw()
   }
 
@@ -198,14 +206,28 @@ function Game() {
   imageSrc = `https://robohash.org/${word}.png`
 
   return (
-    <div>
-      <Link to="/"><Button color='secondary' variant="contained"><HomeIcon /></Button></Link>
+    <div className="game">
+      <div className="gameHead">
+        <Link to="/"><Button color='secondary' variant="contained"><HomeIcon /></Button></Link>
+        <br></br>
+        <Typography variant="p">Score:
+          <div className="score">
+            <FlipNumbers
+              play
+              color="#222"
+              width={50}
+              height={50}
+              numbers={`${score}`}
+            />
+          </div>
+        </Typography>
 
-      <Typography variant="h2">Score: {score}</Typography>
+        {localStorage.getItem("highscore") ?
+          <Typography variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography> : <Typography variant="h5">Highscore: 0</Typography>
+        }
+      </div>
 
-      {localStorage.getItem("highscore") ?
-        <Typography variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography> : <Typography variant="h5">Highscore: 0</Typography>
-      }
+      <br></br>
 
       {deckState != null ?
 
@@ -219,12 +241,14 @@ function Game() {
               {cardDraw != null ?
 
                 <div className="card-front">
-                  <img className='cardImg' src={cardDraw.image}></img>
-                </div> : <div className="card-back"></div>
+                <div className="deck"></div>
+                  <img className='cardImg' src={cardDraw.image} alt={cardDraw.code}></img>
+                </div> : <div className="card-front"><div className="deck"></div><div className="card-back"></div></div>
 
               }
-            </div> : <div className="flipping"></div>
+            </div> : <div></div>
           }
+          <div className="gameBtnContainer">
           <div className="gameBtns">
 
             <form className="higher" onSubmit={(event) => { handleSubmit(event) }}>
@@ -234,6 +258,7 @@ function Game() {
             <form className="lower" onSubmit={(event) => { handleSubmit(event) }}>
               <Button color='secondary' className="gameBtn" type="submit" variant="contained"><KeyboardArrowDownIcon className='icons' /></Button>
             </form>
+            </div>
 
           </div>
         </div> : <div className="card-back"></div>
