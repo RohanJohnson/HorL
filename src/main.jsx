@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={theme}>
     <div className="container">
       <App />
-      <AdSpace />
+      {/* <AdSpace /> */}
     </div>
   </ThemeProvider>
 

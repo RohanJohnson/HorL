@@ -1,6 +1,8 @@
 import { Typography, Button } from '@mui/material'
 import { Link } from "react-router-dom";
 
+import './App.css'
+
 function Menu() {
 
     return (
@@ -16,9 +18,6 @@ function Menu() {
             <div className="btns">
                 <Link to='/game'>
                     <Button color='secondary' variant="contained">Play</Button>
-                </Link>
-                <Link to="/mobile">
-                    <Button color='secondary' variant="outlined">Mobile</Button>
                 </Link>
             </div>
         </div>
