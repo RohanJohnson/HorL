@@ -5,7 +5,7 @@ class Platform extends Component {
 
     state = {
         gravity: 1,
-        friction: 0.1,
+        friction: 0.4,
         num: 2,
         player: {
             x: 200,
@@ -50,10 +50,11 @@ class Platform extends Component {
 
     update = () => {
         this.setState({
+            friction: this.state.player.y > 640 ? 0.4 : 0.1,
             player: {
                 x: this.state.player.x + this.state.player.x_v,
                 y: this.state.player.y > 660 ? 660 : this.state.player.y + this.state.player.y_v,
-                x_v: this.state.player.x_v === 0 ? 0 : this.state.player.x_v > 0 ? this.state.player.x_v - this.state.friction : this.state.player.x_v < -this.state.friction ? this.state.player.x_v + this.state.friction : 0,
+                x_v: this.state.player.x < 1250 ? this.state.player.x > 40 ? this.state.player.x_v === 0 ? 0 : this.state.player.x_v > 0 ? this.state.player.x_v - this.state.friction : this.state.player.x_v < -this.state.friction ? this.state.player.x_v + this.state.friction : 0 : this.state.player.x_v < 0 ? (this.state.player.x_v*-.4):this.state.player.x_v : this.state.player.x_v > 0 ? (this.state.player.x_v*-.4):this.state.player.x_v,
                 y_v: this.state.player.y < 660 ? (this.state.player.y_v + this.state.gravity) : 0,
                 jump: true,
                 jumpStrength: this.state.player.jumpStrength,
@@ -72,7 +73,7 @@ class Platform extends Component {
         document.addEventListener("keyup", e => {
             
             // move right
-            e.code === "KeyD" ? this.setState({
+            e.code === "KeyD" && this.state.player.x_v == 0  ? this.setState({
                 player: {
                     x: this.state.player.x,
                     y: this.state.player.y,
@@ -87,7 +88,7 @@ class Platform extends Component {
             }) : null
 
             //move left
-            e.code === "KeyA" ? this.setState({
+            e.code === "KeyA" && this.state.player.x_v == 0  ? this.setState({
                 player: {
                     x: this.state.player.x,
                     y: this.state.player.y,
@@ -104,7 +105,7 @@ class Platform extends Component {
         document.addEventListener("keydown", e => {
 
             // jump
-            e.code === "KeyW" || e.code === "Space" ? this.setState({
+            e.code === "KeyW" || e.code === "Space"? this.setState({
                 player: {
                     x: this.state.player.x,
                     y: this.state.player.y - 1,
@@ -119,19 +120,19 @@ class Platform extends Component {
             }) : null
 
             // stop
-            e.code === "KeyS" ? this.setState({
-                player: {
-                    x: this.state.player.x,
-                    y: this.state.player.y,
-                    x_v: 0,
-                    y_v: this.state.player.y_v,
-                    jump: true,
-                    jumpStrength: this.state.player.jumpStrength,
-                    height: this.state.player.height,
-                    width: this.state.player.width,
-                    maxSpeed: this.state.player.maxSpeed,
-                }
-            }) : null
+            // e.code === "KeyS" ? this.setState({
+            //     player: {
+            //         x: this.state.player.x,
+            //         y: this.state.player.y,
+            //         x_v: 0,
+            //         y_v: this.state.player.y_v,
+            //         jump: true,
+            //         jumpStrength: this.state.player.jumpStrength,
+            //         height: this.state.player.height,
+            //         width: this.state.player.width,
+            //         maxSpeed: this.state.player.maxSpeed,
+            //     }
+            // }) : null
         })
     }
 

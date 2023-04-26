@@ -3,12 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './Mobile.css'
 import axios from 'axios';
-import { Typography, Input, Button } from '@mui/material'
+import { Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FlipNumbers from 'react-flip-numbers'
+import playClick from './Menu';
 
 
 
@@ -200,23 +201,23 @@ function Game() {
 
             {localStorage.getItem("highscore") ?
                 <div className="highScore">
-                    <Typography className="highScore" variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography>
-                </div> 
-                
+                    <Typography color="white" className="highScore" variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography>
+                </div>
+
                 :
 
                 <div className="highScore">
-                    <Typography className="highScore" variant="h5">Highscore: 0</Typography>
+                    <Typography color="white" className="highScore" variant="h5">Highscore: 0</Typography>
                 </div>
             }
 
             <div className="gameHead">
 
-                <Typography variant="p">Score:
+                <Typography color="white" variant="p">Score:
                     <div className="score">
                         <FlipNumbers
                             play
-                            color="#222"
+                            color="white"
                             width={50}
                             height={50}
                             numbers={`${score}`}
@@ -256,7 +257,7 @@ function Game() {
                                 <div className="btnText">
                                     <div><KeyboardArrowUpIcon className='icons' /></div>
 
-                                    <div><Typography variant="h5">Higher</Typography></div>
+                                    <div><Typography variant="h4">Higher</Typography></div>
                                 </div>
 
                             </Button>
@@ -268,7 +269,7 @@ function Game() {
                                 <div className="btnText">
                                     <div><KeyboardArrowDownIcon className='icons' /></div>
 
-                                    <div><Typography variant="h5">Lower</Typography></div>
+                                    <div><Typography variant="h4">Lower</Typography></div>
                                 </div>
 
                             </Button>

@@ -18,7 +18,9 @@
     "react-dom": "^18.2.0",
     "react-flip-numbers": "^3.0.8",
     "react-router-dom": "^6.10.0",
-    "react-scoreboard": "^0.1.7"
+    "react-scoreboard": "^0.1.7",
+    "react-sound": "^1.2.0",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

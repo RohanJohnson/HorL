@@ -1,22 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+* {
+    font-family: 'League Spartan', sans-serif;
+}
+
 #root {
     margin: 0 auto;
     text-align: center;
     width: 100vw;
-    background-color: rgb(122, 197, 219);
+    background: "./normal.jpg";
+    font-family: 'League Spartan', sans-serif;
 }
+
 #root,
 body {
     width: 100vw;
     padding: 0;
     margin: 0;
 }
-.game{
+
+.game {
     width: 100vw;
     height: 100vh;
 }
-.homeBtn{
+
+.homeBtn {
     z-index: 99;
 }
+
+.header {
+    background-color: rgba(0, 0, 0, 0.623);
+    padding: 30px;
+    border-radius: 20px;
+    margin: 15px;
+}
+
+span {
+    color: white;
+    text-align: center;
+}
+
+.score {
+    background-color: rgba(0, 0, 0, 0.623);
+    padding-top: 10px;
+}
+
+.HorL-logo {
+    animation: HorL-logo infinite 5s linear;
+}
+
+
+@keyframes HorL-logo {
+    0% {
+        transform: scale(1)  rotate(0deg);
+    }
+    25% {
+        transform: scale(0.8) rotate(-5deg);
+    }
+    50% {
+        transform: scale(0.95) rotate(0deg);
+    }
+    75% {
+        transform: scale(0.8) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+    
+}
+
 @keyframes logo-spin {
     from {
         transform: rotate(0deg);
@@ -25,6 +76,7 @@ body {
         transform: rotate(360deg);
     }
 }
+
 @media (prefers-reduced-motion: no-preference) {
     a:nth-of-type(2) .logo {
         animation: logo-spin infinite 20s linear;
@@ -32,7 +84,6 @@ body {
 }
 
 @media only screen and (min-width: 913px) {
-
     .homeBtn {
         position: fixed;
         top: 2%;
@@ -48,9 +99,6 @@ body {
     .read-the-docs {
         color: #888;
     }
-    .header {
-        font-family: Verdana;
-    }
     .btns {
         width: 100%;
         display: flex;
@@ -65,7 +113,6 @@ body {
         min-height: 30px;
         height: 10vh;
         font-size: 5vh;
-        font-family: Verdana;
     }
     .gameBtns {
         width: 30vw;
@@ -148,9 +195,9 @@ body {
         width: 200px;
         height: 277.88px;
     }
-    .highScore{
+    .highScore {
         position: fixed;
-        top: 3%;
+        top: 4%;
         left: 10%;
     }
     .center {
@@ -160,16 +207,13 @@ body {
 }
 
 @media only screen and (max-width: 912px) {
-   
     .card {
         padding: 2em;
     }
     .read-the-docs {
         color: #888;
     }
-    .header {
-        font-family: Verdana;
-    }
+    .header {}
     .btns {
         width: 100%;
         display: flex;
@@ -184,7 +228,6 @@ body {
         min-height: 30px;
         height: 10vh;
         font-size: 5vh;
-        font-family: Verdana;
     }
     .gameBtns {
         width: 50vw;
@@ -304,35 +347,35 @@ body {
 }
 
 @media only screen and (max-width: 320px) {
-    .game{
+    .game {
         display: flex;
         flex-direction: column;
         width: 100vw;
         height: 100vh;
     }
-    .gameHead,h5{
+    .gameHead,
+    h5 {
         max-width: 100vw;
     }
-    .card-front{
+    .card-front {
         flex-direction: column;
         align-items: center;
     }
-    .innerCon{
+    .innerCon {
         position: fixed;
         top: 15%;
         display: flex;
         flex-direction: column;
     }
-    .gameBtns{
+    .gameBtns {
         width: 90vw;
         margin-left: 5vw;
     }
-    .gameBtn{
+    .gameBtn {
         width: 100%;
     }
-    
 }
 
-.container{
+.container {
     max-width: 100vw;
 }

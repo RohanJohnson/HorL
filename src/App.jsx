@@ -9,8 +9,10 @@ import Menu from './Menu'
 import Game from './Game'
 import Test from './Test'
 import Mobile from './Mobile'
+import Settings from './Settings'
 import Platform from './Platform'
-import { Button } from '@mui/material';
+import { Typography, Button } from '@mui/material'
+import playClick from './Menu';
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
             <Route path="/test" element={<Test />} />
             <Route path="/mobile" element={<Mobile />} />
             <Route path="/plat" element={<Platform />} />
+            <Route path="/settings" element={<Settings />} />
         </Routes>
     </Router>
     </div>

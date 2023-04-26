@@ -50,7 +50,7 @@
     left: 2%;
 }
 
-.homeBtn>button{
+.homeBtn>Button  {
     width: 5vw;
     height: 5vh;
 }
@@ -64,7 +64,7 @@
 }
 
 .header {
-    font-family: Verdana;
+    
 }
 
 .btns {
@@ -76,13 +76,13 @@
     height: 40vh;
 }
 
-.btns button {
+.btns Button   {
     width: 100%;
     margin-top: 30px;
     min-height: 30px;
     height: 10vh;
     font-size: 5vh;
-    font-family: Verdana;
+    
 }
 
 .gameBtns {

@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './Mobile.css'
 import axios from 'axios';
-import { Typography, Input, Button } from '@mui/material'
+import { Typography, Input, Button }from '@mui/material'
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -196,7 +196,7 @@ function Game() {
 
     return (
         <div className="game">
-            <Link className="homeBtn" to="/"><Button className="homeBtn" color='secondary' variant="contained"><HomeIcon /></Button></Link>
+            <Link className="homeBtn" to="/"><Button   className="homeBtn" color='secondary' variant="contained"><HomeIcon /></Button></Link>
 
             {localStorage.getItem("highscore") ?
                 <div className="highScore">
@@ -251,7 +251,7 @@ function Game() {
                     <div className="gameBtns">
 
                         <form className="higher" onSubmit={(event) => { handleSubmit(event) }}>
-                            <Button color='secondary' className="gameBtn" type="submit" variant="contained">
+                            <Button   color='secondary' className="gameBtn" type="submit" variant="contained">
 
                                 <div className="btnText">
                                     <div><KeyboardArrowUpIcon className='icons' /></div>
@@ -263,7 +263,7 @@ function Game() {
                         </form>
 
                         <form className="lower" onSubmit={(event) => { handleSubmit(event) }}>
-                            <Button color='secondary' className="gameBtn" type="submit" variant="contained">
+                            <Button   color='secondary' className="gameBtn" type="submit" variant="contained">
 
                                 <div className="btnText">
                                     <div><KeyboardArrowDownIcon className='icons' /></div>

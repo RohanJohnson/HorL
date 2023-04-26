@@ -7,12 +7,25 @@ import { ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'League Spartan',
+    ].join(','),
+  },
+  // button: {
+  //   fontFamily: [
+  //     'League Spartan',
+  //   ].join(','),
+  // },
   palette: {
     primary: {
-      main: "#7ac4db",
+      main: "#00563E",
     },
     secondary: {
-      main: "#d86542",
+      main: "#FEA501",
+    },
+    white: {
+      main: "#fff",
     },
   },
 });
