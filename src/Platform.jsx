@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class Platform extends Component {
 
 
@@ -54,7 +55,7 @@ class Platform extends Component {
             player: {
                 x: this.state.player.x + this.state.player.x_v,
                 y: this.state.player.y > 660 ? 660 : this.state.player.y + this.state.player.y_v,
-                x_v: this.state.player.x < 1250 ? this.state.player.x > 40 ? this.state.player.x_v === 0 ? 0 : this.state.player.x_v > 0 ? this.state.player.x_v - this.state.friction : this.state.player.x_v < -this.state.friction ? this.state.player.x_v + this.state.friction : 0 : this.state.player.x_v < 0 ? (this.state.player.x_v*-.4):this.state.player.x_v : this.state.player.x_v > 0 ? (this.state.player.x_v*-.4):this.state.player.x_v,
+                x_v: this.state.player.x < 1250 ? this.state.player.x > 40 ? this.state.player.x_v === 0 ? 0 : this.state.player.x_v > 0 ? this.state.player.x_v - this.state.friction : this.state.player.x_v < -this.state.friction ? this.state.player.x_v + this.state.friction : 0 : this.state.player.x_v < 0 ? (this.state.player.x_v*-.6):this.state.player.x_v : this.state.player.x_v > 0 ? (this.state.player.x_v*-.6):this.state.player.x_v,
                 y_v: this.state.player.y < 660 ? (this.state.player.y_v + this.state.gravity) : 0,
                 jump: true,
                 jumpStrength: this.state.player.jumpStrength,

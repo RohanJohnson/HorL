@@ -10,6 +10,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FlipNumbers from 'react-flip-numbers'
 import playClick from './Menu';
+import Card from './Card';
+import Deck from './Deck'
+import GameOver from './GameOver';
 
 
 
@@ -23,6 +26,7 @@ function Game() {
     const [flip, setFlip] = useState(false)
     const [count, setCount] = useState(0)
     const [value, setValue] = useState(null)
+    const [over, setOver] = useState(false);
 
 
 
@@ -40,9 +44,11 @@ function Game() {
 
         newDeck();
 
-        setScore(0);
+        setOver(true);
 
-        setTimeout(window.location.href = './', 3000);
+        
+
+        // setTimeout(window.location.href = './', 3000);
     }
 
     async function setDeck() {
@@ -82,7 +88,8 @@ function Game() {
             }
 
             const response = await axios(config);
-            setCardDraw(response.data.cards[0])
+            setTimeout(() => { setCardDraw(response.data.cards[0]) }, 400)
+
 
 
             console.log(response.data.cards[0].value)
@@ -190,94 +197,101 @@ function Game() {
 
     if (cardDraw == null && count == 0) {
         setCount(1)
+        setScore("0000");
         draw()
     }
 
 
 
     return (
-        <div className="game">
-            <Link className="homeBtn" to="/"><Button className="homeBtn" color='secondary' variant="contained"><HomeIcon /></Button></Link>
+        <div>
+            {over ?
+                <GameOver score={score} /> :
 
-            {localStorage.getItem("highscore") ?
-                <div className="highScore">
-                    <Typography color="white" className="highScore" variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography>
-                </div>
+                <div className="game">
+                    <Link className="homeBtn" to="/"><Button className="homeBtn" color='secondary' variant="contained"><HomeIcon /></Button></Link>
 
-                :
+                    {localStorage.getItem("highscore") ?
+                        <div className="highScore">
+                            <Typography color="white" className="highScore" variant="h5">Highscore:{localStorage.getItem("highscore")}</Typography>
+                        </div>
 
-                <div className="highScore">
-                    <Typography color="white" className="highScore" variant="h5">Highscore: 0</Typography>
-                </div>
-            }
+                        :
 
-            <div className="gameHead">
-
-                <Typography color="white" variant="p">Score:
-                    <div className="score">
-                        <FlipNumbers
-                            play
-                            color="white"
-                            width={50}
-                            height={50}
-                            numbers={`${score}`}
-                        />
-                    </div>
-                </Typography>
-
-
-            </div>
-
-            <br></br>
-
-            {deckState != null ?
-
-
-
-                <div className="innerCon">
-
-
-
-
-                    {cardDraw != null ?
-
-                        <div className="card-front">
-                            <div className="deck"></div>
-                            <img className='cardImg' src={cardDraw.image} alt={cardDraw.code}></img>
-                        </div> : <div className="card-front"><div className="deck"></div><div className="card-back"></div></div>
-
+                        <div className="highScore">
+                            <Typography color="white" className="highScore" variant="h5">Highscore: 0</Typography>
+                        </div>
                     }
 
+                    <div className="gameHead">
 
-                    <div className="gameBtns">
+                        <Typography color="white" variant="p">Score:
+                            <div className="score">
+                                <FlipNumbers
+                                    play
+                                    color="white"
+                                    width={50}
+                                    height={50}
+                                    numbers={`${score}`}
+                                />
+                            </div>
+                        </Typography>
 
-                        <form className="higher" onSubmit={(event) => { handleSubmit(event) }}>
-                            <Button color='secondary' className="gameBtn" type="submit" variant="contained">
 
-                                <div className="btnText">
-                                    <div><KeyboardArrowUpIcon className='icons' /></div>
-
-                                    <div><Typography variant="h4">Higher</Typography></div>
-                                </div>
-
-                            </Button>
-                        </form>
-
-                        <form className="lower" onSubmit={(event) => { handleSubmit(event) }}>
-                            <Button color='secondary' className="gameBtn" type="submit" variant="contained">
-
-                                <div className="btnText">
-                                    <div><KeyboardArrowDownIcon className='icons' /></div>
-
-                                    <div><Typography variant="h4">Lower</Typography></div>
-                                </div>
-
-                            </Button>
-                        </form>
                     </div>
 
-                </div> : <div className="card-back"></div>
-            }
+                    <br></br>
+
+                    {deckState != null ?
+
+
+
+                        <div className="innerCon">
+
+
+
+
+                            {cardDraw != null ?
+
+                                <div className="card-front">
+                                    {/* <div className="deck"></div> */}
+                                    <Deck />
+                                    <Card src={cardDraw.image} alt={cardDraw.code} />
+                                </div> : <div className="card-front"><Deck /><Deck /></div>
+
+                            }
+
+
+                            <div className="gameBtns">
+
+                                <form className="higher" onSubmit={(event) => { handleSubmit(event) }}>
+                                    <Button color='secondary' className="gameBtn" type="submit" variant="contained">
+
+                                        <div className="btnText">
+                                            <div><KeyboardArrowUpIcon className='icons' /></div>
+
+                                            <div><Typography variant="h4">Higher</Typography></div>
+                                        </div>
+
+                                    </Button>
+                                </form>
+
+                                <form className="lower" onSubmit={(event) => { handleSubmit(event) }}>
+                                    <Button color='secondary' className="gameBtn" type="submit" variant="contained">
+
+                                        <div className="btnText">
+                                            <div><KeyboardArrowDownIcon className='icons' /></div>
+
+                                            <div><Typography variant="h4">Lower</Typography></div>
+                                        </div>
+
+                                    </Button>
+                                </form>
+                            </div>
+
+                        </div> : <div className="card-back"></div>
+                    }
+                </div>}
         </div>
     )
 }

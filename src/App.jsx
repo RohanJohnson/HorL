@@ -13,6 +13,7 @@ import Settings from './Settings'
 import Platform from './Platform'
 import { Typography, Button } from '@mui/material'
 import playClick from './Menu';
+import TestK from './Konva'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/mobile" element={<Mobile />} />
             <Route path="/plat" element={<Platform />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/konva" element = {<TestK />} />
         </Routes>
     </Router>
     </div>

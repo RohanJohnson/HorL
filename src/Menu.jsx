@@ -10,15 +10,7 @@ import './Mobile.css';
 let context;
 let btns;
 
-window.onload = () => {
 
-    document.getElementById('body').click();
-
-}
-
-window.BeforeUnloadEvent = ()=>{
-    context.close();
-}
 
 
 
